@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Trade Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+  /* Reset and base */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1f2937, #3b82f6);
+    color: #f9fafb;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    line-height: 1.6;
+  }
+
+  a {
+    color: #3b82f6;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover {
+    color: #60a5fa;
+  }
+
+  header {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  nav .logo {
+    font-weight: 700;
+    font-size: 1.8rem;
+    cursor: default;
+    user-select: none;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 24px;
+  }
+
+  nav ul li {
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  nav ul li:hover {
+    color: #60a5fa;
+  }
+
+  section {
+    padding: 80px 20px 100px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .intro {
+    text-align: center;
+    margin-top: 80px;
+  }
+  .intro h1 {
+    font-size: 3.3rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: 1.2px;
+  }
+  .intro p {
+    font-weight: 300;
+    font-size: 1.3rem;
+    color: #cbd5e1;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #90cdf4;
+    letter-spacing: 0.03em;
+  }
+
+  .skills-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    gap: 24px;
+  }
+
+  .skill-card {
+    background: rgba(59, 130, 246, 0.15);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 6px 18px rgba(14, 47, 97, 0.5);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+  }
+  .skill-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 14px 28px rgba(14, 47, 97, 0.8);
+  }
+  .skill-card h3 {
+    margin-bottom: 12px;
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
+  .skill-card p {
+    color: #dbeafe;
+  }
+
+  .portfolio-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 32px;
+  }
+
+  .project {
+    background: rgba(59, 130, 246, 0.15);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 6px 18px rgba(14, 47, 97, 0.5);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .project:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 14px 28px rgba(14, 47, 97, 0.8);
+  }
+  .project h3 {
+    margin-bottom: 14px;
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: #bfdbfe;
+  }
+  .project p {
+    flex-grow: 1;
+    color: #dbeafe;
+    margin-bottom: 14px;
+  }
+  .project a {
+    align-self: flex-start;
+    background: #3b82f6;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    color: white;
+    box-shadow: 0 4px 14px #3b82f6aa;
+    transition: background-color 0.3s ease;
+  }
+  .project a:hover {
+    background: #60a5fa;
+  }
+
+  /* Contact */
+  .contact {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 40px 24px 60px;
+    border-radius: 20px;
+    max-width: 600px;
+    margin: 0 auto 160px;
+    box-shadow: 0 6px 28px rgba(14, 47, 97, 0.7);
+  }
+  .contact h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #bae6fd;
+    font-weight: 700;
+    font-size: 2rem;
+  }
+  .contact form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .contact input, 
+  .contact textarea {
+    padding: 14px 20px;
+    border-radius: 12px;
+    border: none;
+    font-size: 1rem;
+    resize: vertical;
+  }
+  .contact input:focus, .contact textarea:focus {
+    outline: none;
+    box-shadow: 0 0 8px #3b82f6;
+  }
+  .contact button {
+    background: #3b82f6;
+    padding: 14px 0;
+    border-radius: 14px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    font-size: 1.15rem;
+    transition: background-color 0.3s ease;
+  }
+  .contact button:hover {
+    background: #60a5fa;
+  }
+
+  footer {
+    text-align: center;
+    padding: 16px;
+    font-size: 0.9rem;
+    color: #94a3b8;
+  }
+
+  @media (max-width: 600px) {
+    nav ul {
+      gap: 14px;
+      font-size: 0.9rem;
+    }
+    .intro h1 {
+      font-size: 2.3rem;
+    }
+    section {
+      padding: 60px 12px 80px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">TradePro</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="intro" id="home">
+  <h1>Hi, I'm Val Medalla</h1>
+  <p>Professional Trading Specialist | Portfolio Manager | Market Strategist</p>
+</section>
+
+<section id="about">
+  <h2 class="section-title">About Me</h2>
+  <p>Hello! I'm Val, a passionate trade portfolio manager with 5+ years of experience navigating stock and crypto markets. I specialize in data-driven decision making, strategic risk management, and maximizing returns with disciplined trading. Through this portfolio, I showcase some of my favorite projects, trading strategies, and insights. Let's navigate the markets together!</p>
+</section>
+
+<section id="skills">
+  <h2 class="section-title">Skills & Expertise</h2>
+  <div class="skills-list">
+    <div class="skill-card">
+      <h3>Technical Analysis</h3>
+      <p>Extensive experience in charting, indicators, trend patterns, and oscillators to identify high-probability trades.</p>
+    </div>
+    <div class="skill-card">
+      <h3>Algorithmic Trading</h3>
+      <p>Development and backtesting of trading bots using Python to automate strategy execution.</p>
+    </div>
+    <div class="skill-card">
+      <h3>Portfolio Management</h3>
+      <p>Risk diversification, position sizing, and asset allocation expertise to optimize portfolio performance.</p>
+    </div>
+    <div class="skill-card">
+      <h3>Market Research</h3>
+      <p>Up-to-date market news tracking and fundamental analysis of stocks and cryptocurrencies.</p>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <h2 class="section-title">Portfolio Projects</h2>
+  <div class="portfolio-list">
+    <div class="project">
+      <h3>Crypto Trading Bot</h3>
+      <p>Python-based automated bot trading multiple crypto pairs on Binance with real-time indicators and stop-loss mechanisms.</p>
+      <a href="https://github.com/jordan-white/crypto-trading-bot" target="_blank" rel="noopener">View on GitHub</a>
+    </div>
+    <div class="project">
+      <h3>Stock Market Dashboard</h3>
+      <p>Interactive React dashboard providing live stock data visualization, technical indicators, watchlists, and alerts.</p>
+      <a href="https://stockpro-dashboard.com" target="_blank" rel="noopener">Visit Site</a>
+    </div>
+    <div class="project">
+      <h3>Risk Management Simulator</h3>
+      <p>A Monte Carlo simulation tool assessing portfolio risk and volatility for making informed trade decisions.</p>
+      <a href="https://github.com/jordan-white/risk-management-sim" target="_blank" rel="noopener">View on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <h2>Contact Me</h2>
+  <form id="contact-form" aria-label="Contact form">
+    <input type="text" id="name" placeholder="Your name" required aria-required="true" />
+    <input type="email" id="email" placeholder="Your email" required aria-required="true" />
+    <textarea id="message" rows="5" placeholder="Your message" required aria-required="true"></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<footer>
+  <p>&copy; 2024 Jordan White | Trade Portfolio</p>
+</footer>
+
+<script>
+  // Simple form handler to show alert on submit 
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Gather values
+    const name = e.target.name.value.trim();
+    const email = e.target.email.value.trim();
+    const message = e.target.message.value.trim();
+
+    if (!name || !email || !message) {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    // Basic email validation 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailRegex.test(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    alert('Thank you, ' + name + '! Your message has been sent.');
+
+    // Reset form
+    e.target.reset();
+  });
+</script>
+
+</body>
+</html>
+
